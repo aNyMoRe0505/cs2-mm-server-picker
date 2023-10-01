@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 25px;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.text {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.serverWrapper {
+  display: flex;
+  width: 500px;
+  align-items: center;
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.checkbox {
+  width: 15px;
+  height: 15px;
+  margin: 0 10px 0 0;
+}
+
+#serverContainer {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.updatePing {
+  margin: 0 0 0 10px;
+  border-radius: 20px;
+  display: block;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#actionContainer {
+  margin: 20px 0 0;
+  display: flex;
+  justify-content: center;
+  width: 500px;
+}
+
+.actionBtn {
+  margin: 0px 10px;
+  width: 50px;
+  border-radius: 20px;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+}

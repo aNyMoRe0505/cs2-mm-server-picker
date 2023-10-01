@@ -1,0 +1,28 @@
+{
+  "name": "cs2-mm-server-picker",
+  "version": "1.0.0",
+  "description": "cs2 match-making server picker",
+  "main": "main.js",
+  "scripts": {
+    "start": "ELECTRON_ENABLE_LOGGING=true electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aNyMoRe0505/cs2-mm-server-picker.git"
+  },
+  "author": "Paul Wang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aNyMoRe0505/cs2-mm-server-picker/issues"
+  },
+  "homepage": "https://github.com/aNyMoRe0505/cs2-mm-server-picker#readme",
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb-base": "^15.0.0"
+  },
+  "dependencies": {
+    "electron": "^26.2.4",
+    "ping": "^0.4.4",
+    "sudo-prompt": "^9.2.1"
+  }
+}
