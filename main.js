@@ -18,6 +18,7 @@ const createWindow = async () => {
     },
   });
   win.loadFile('index.html');
+  win.setMenuBarVisibility(false);
 
   win.once('ready-to-show', () => {
     win.show();
