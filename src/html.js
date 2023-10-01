@@ -84,7 +84,7 @@ ipcRenderer.on('paintServer', (_, args) => {
   resetBtn.textContent = '重置';
 
   applyBtn.addEventListener('click', () => {
-    apply(['12345']);
+    apply(targetBlockIp);
   });
 
   resetBtn.addEventListener('click', () => {
