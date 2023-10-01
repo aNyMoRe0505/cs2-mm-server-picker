@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const { updateCS2ServerList, displaySvPop, allPopIpv4 } = require('./src/server');
@@ -31,5 +33,8 @@ app.whenReady().then(() => {
   if (process.platform !== 'win32') {
     app.quit();
   }
+
+  if (require('electron-squirrel-startup')) return;
+
   createWindow();
 });

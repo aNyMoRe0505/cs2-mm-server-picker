@@ -4,7 +4,9 @@
   "description": "cs2 match-making server picker",
   "main": "main.js",
   "scripts": {
-    "start": "ELECTRON_ENABLE_LOGGING=true electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "type": "git",
@@ -17,11 +19,18 @@
   },
   "homepage": "https://github.com/aNyMoRe0505/cs2-mm-server-picker#readme",
   "devDependencies": {
+    "@electron-forge/cli": "^6.4.2",
+    "@electron-forge/maker-deb": "^6.4.2",
+    "@electron-forge/maker-rpm": "^6.4.2",
+    "@electron-forge/maker-squirrel": "^6.4.2",
+    "@electron-forge/maker-zip": "^6.4.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
+    "electron": "^26.2.4",
     "eslint": "^8.50.0",
     "eslint-config-airbnb-base": "^15.0.0"
   },
   "dependencies": {
-    "electron": "^26.2.4",
+    "electron-squirrel-startup": "^1.0.0",
     "ping": "^0.4.4",
     "sudo-prompt": "^9.2.1"
   }
