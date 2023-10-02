@@ -19,6 +19,10 @@
   },
   "homepage": "https://github.com/aNyMoRe0505/cs2-mm-server-picker#readme",
   "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb-base": "^15.0.0"
+  },
+  "dependencies": {
     "@electron-forge/cli": "^6.4.2",
     "@electron-forge/maker-deb": "^6.4.2",
     "@electron-forge/maker-rpm": "^6.4.2",
@@ -26,10 +30,6 @@
     "@electron-forge/maker-zip": "^6.4.2",
     "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
     "electron": "^26.2.4",
-    "eslint": "^8.50.0",
-    "eslint-config-airbnb-base": "^15.0.0"
-  },
-  "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "ping": "^0.4.4",
     "sudo-prompt": "^9.2.1"
