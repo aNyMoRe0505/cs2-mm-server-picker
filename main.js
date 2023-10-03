@@ -1,12 +1,13 @@
 /* eslint-disable global-require */
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const { initialize, enable } = require('@electron/remote/main');
 const { updateCS2ServerList, displaySvPop, allPopIpv4 } = require('./src/server');
 
-let win;
+initialize();
 
 const createWindow = async () => {
-  win = new BrowserWindow({
+  const win = new BrowserWindow({
     width:
      800,
     height: 600,
@@ -16,6 +17,9 @@ const createWindow = async () => {
       preload: path.join(__dirname, './src/preload.js'),
     },
   });
+
+  enable(win.webContents);
+
   win.loadFile('index.html');
   win.setMenuBarVisibility(false);
 

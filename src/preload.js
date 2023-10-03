@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 
+const { dialog } = require('@electron/remote');
 const { ipcRenderer } = require('electron');
 const ping = require('ping');
 const { apply, reset } = require('./firewall');
@@ -58,6 +59,7 @@ ipcRenderer.on('paintServer', (_, args) => {
     rePingBtn.textContent = 'Update Ping';
     rePingBtn.className = 'updatePing';
     rePingBtn.addEventListener('click', async () => {
+      rePingBtn.setAttribute('disabled', '');
       pingSpan.textContent = '讀取中 ...';
       let popPingSum = 0;
       for (const ipv4 of displaySvPop[pop].ipv4) {
@@ -66,6 +68,7 @@ ipcRenderer.on('paintServer', (_, args) => {
       }
       const result = Math.round(popPingSum / displaySvPop[pop].ipv4.length);
       pingSpan.textContent = `ping: ${result} ms`;
+      rePingBtn.removeAttribute('disabled');
     });
 
     wrapper.appendChild(rePingBtn);
@@ -85,10 +88,18 @@ ipcRenderer.on('paintServer', (_, args) => {
 
   applyBtn.addEventListener('click', () => {
     apply(targetBlockIp);
+    dialog.showMessageBoxSync({
+      type: 'info',
+      message: '執行完畢, 想確認是否成功可以到防火牆 -> 進階設定 -> 輸出規則 查看是否有 cs2-mm-server-picker',
+    });
   });
 
   resetBtn.addEventListener('click', () => {
     reset();
+    dialog.showMessageBoxSync({
+      type: 'info',
+      message: '重置完畢, 想確認是否重置成功可以到防火牆 -> 進階設定 -> 輸出規則 查詢',
+    });
   });
 
   actionContainer.appendChild(applyBtn);

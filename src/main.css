@@ -59,6 +59,11 @@ a {
   cursor: pointer;
 }
 
+.updatePing:disabled {
+  cursor: not-allowed !important;
+  background: #F5F9FA !important;
+}
+
 #actionContainer {
   margin: 20px 0 0;
   display: flex;
