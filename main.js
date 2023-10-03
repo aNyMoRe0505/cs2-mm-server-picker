@@ -1,10 +1,13 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable global-require */
-const { app, BrowserWindow } = require('electron');
+const {
+  app, BrowserWindow, ipcMain, dialog,
+} = require('electron');
 const path = require('path');
-const { initialize, enable } = require('@electron/remote/main');
+const ping = require('ping');
 const { updateCS2ServerList, displaySvPop, allPopIpv4 } = require('./src/server');
-
-initialize();
+const { apply, reset } = require('./src/firewall');
 
 const createWindow = async () => {
   const win = new BrowserWindow({
@@ -13,12 +16,9 @@ const createWindow = async () => {
     height: 600,
     show: false,
     webPreferences: {
-      nodeIntegration: true,
       preload: path.join(__dirname, './src/preload.js'),
     },
   });
-
-  enable(win.webContents);
 
   win.loadFile('index.html');
   win.setMenuBarVisibility(false);
@@ -34,11 +34,36 @@ const createWindow = async () => {
 };
 
 app.whenReady().then(() => {
-  if (process.platform !== 'win32') {
-    app.quit();
-  }
+  // if (process.platform !== 'win32') {
+  //   app.quit();
+  // }
 
   if (require('electron-squirrel-startup')) return;
+
+  ipcMain.handle('updatePing', async (_, ipAddress) => {
+    let popPingSum = 0;
+    for (const ipv4 of ipAddress) {
+      const { max } = await ping.promise.probe(ipv4);
+      popPingSum += Number(max);
+    }
+    return Math.round(popPingSum / ipAddress.length);
+  });
+
+  ipcMain.on('applyFirewallRule', (_, targetBlockIp) => {
+    apply(targetBlockIp);
+    dialog.showMessageBoxSync({
+      type: 'info',
+      message: '執行完畢, 想確認是否成功可以到防火牆 -> 進階設定 -> 輸出規則 查看是否有 cs2-mm-server-picker',
+    });
+  });
+
+  ipcMain.on('resetFirewallRule', () => {
+    reset();
+    dialog.showMessageBoxSync({
+      type: 'info',
+      message: '重置完畢, 想確認是否重置成功可以到防火牆 -> 進階設定 -> 輸出規則 查詢',
+    });
+  });
 
   createWindow();
 });
