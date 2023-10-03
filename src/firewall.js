@@ -2,16 +2,18 @@ const sudo = require('sudo-prompt');
 
 const ruleName = 'cs2-mm-server-picker';
 
+const resetCommand = `netsh advfirewall firewall show rule name="${ruleName}" >nul && netsh advfirewall firewall delete rule name="${ruleName}"`;
+
 const reset = () => {
-  // not exist => do nothing
-  // exist => reset
-  sudo.exec(`netsh advfirewall firewall delete rule name="${ruleName}"`);
+  sudo.exec(resetCommand);
 };
 
 const apply = (ipAddress) => {
-  // reset();
   const targetIpList = ipAddress.join();
-  sudo.exec(`netsh advfirewall firewall add rule name="${ruleName}" dir=out action=block remoteip=${targetIpList}`);
+
+  const applyCommand = `netsh advfirewall firewall add rule name="${ruleName}" dir=out action=block remoteip=${targetIpList}`;
+
+  sudo.exec(`${resetCommand} && ${applyCommand} || ${applyCommand}`);
 };
 
 module.exports = {

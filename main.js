@@ -34,11 +34,11 @@ const createWindow = async () => {
 };
 
 app.whenReady().then(() => {
+  if (require('electron-squirrel-startup')) return;
+
   if (process.platform !== 'win32') {
     app.quit();
   }
-
-  if (require('electron-squirrel-startup')) return;
 
   ipcMain.handle('updatePing', async (_, ipAddress) => {
     let popPingSum = 0;
@@ -53,7 +53,7 @@ app.whenReady().then(() => {
     apply(targetBlockIp);
     dialog.showMessageBoxSync({
       type: 'info',
-      message: '執行完畢, 想確認是否成功可以到防火牆 -> 進階設定 -> 輸出規則 查看是否有 cs2-mm-server-picker',
+      message: '可能會要求權限, 接受後想確認是否成功可以到防火牆 -> 進階設定 -> 輸出規則 查看是否有 cs2-mm-server-picker',
     });
   });
 
@@ -61,7 +61,7 @@ app.whenReady().then(() => {
     reset();
     dialog.showMessageBoxSync({
       type: 'info',
-      message: '重置完畢, 想確認是否重置成功可以到防火牆 -> 進階設定 -> 輸出規則 查詢',
+      message: '可能會要求權限, 接受後想確認是否重置成功可以到防火牆 -> 進階設定 -> 輸出規則 查看 cs2-mm-server-picker 是否已經刪除',
     });
   });
 
