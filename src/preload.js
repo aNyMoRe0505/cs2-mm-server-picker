@@ -1,9 +1,4 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
-
 const { ipcRenderer } = require('electron');
-const ping = require('ping');
-const { apply, reset } = require('./firewall');
 
 ipcRenderer.on('spinner', (_, isLoading) => {
   document.getElementById('loading').style.display = isLoading === true ? 'block' : 'none';
@@ -58,14 +53,12 @@ ipcRenderer.on('paintServer', (_, args) => {
     rePingBtn.textContent = 'Update Ping';
     rePingBtn.className = 'updatePing';
     rePingBtn.addEventListener('click', async () => {
+      rePingBtn.setAttribute('disabled', '');
       pingSpan.textContent = '讀取中 ...';
-      let popPingSum = 0;
-      for (const ipv4 of displaySvPop[pop].ipv4) {
-        const { max } = await ping.promise.probe(ipv4);
-        popPingSum += Number(max);
-      }
-      const result = Math.round(popPingSum / displaySvPop[pop].ipv4.length);
+
+      const result = await ipcRenderer.invoke('updatePing', displaySvPop[pop].ipv4);
       pingSpan.textContent = `ping: ${result} ms`;
+      rePingBtn.removeAttribute('disabled');
     });
 
     wrapper.appendChild(rePingBtn);
@@ -84,11 +77,11 @@ ipcRenderer.on('paintServer', (_, args) => {
   resetBtn.textContent = '重置';
 
   applyBtn.addEventListener('click', () => {
-    apply(targetBlockIp);
+    ipcRenderer.send('applyFirewallRule', targetBlockIp);
   });
 
   resetBtn.addEventListener('click', () => {
-    reset();
+    ipcRenderer.send('resetFirewallRule');
   });
 
   actionContainer.appendChild(applyBtn);
