@@ -34,9 +34,9 @@ const createWindow = async () => {
 };
 
 app.whenReady().then(() => {
-  // if (process.platform !== 'win32') {
-  //   app.quit();
-  // }
+  if (process.platform !== 'win32') {
+    app.quit();
+  }
 
   if (require('electron-squirrel-startup')) return;
 
