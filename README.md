@@ -6,7 +6,7 @@
 
 ## 下載
 
-[v1.0.1](https://github.com/aNyMoRe0505/cs2-mm-server-picker/releases/tag/v1.0.1)
+[v1.0.2](https://github.com/aNyMoRe0505/cs2-mm-server-picker/releases/tag/v1.0.2)
 
 點選 cs2-mm-server-picker-1.0.1.Setup.exe
 
