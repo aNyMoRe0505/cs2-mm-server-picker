@@ -1,6 +1,3 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
-
 const { ipcRenderer } = require('electron');
 
 ipcRenderer.on('spinner', (_, isLoading) => {
