@@ -13,7 +13,7 @@ const createWindow = async () => {
     show: false,
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(__dirname, './src/html.js'),
+      preload: path.join(__dirname, './src/preload.js'),
     },
   });
   win.loadFile('index.html');
