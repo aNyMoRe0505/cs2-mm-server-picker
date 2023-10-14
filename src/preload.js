@@ -1,12 +1,32 @@
 const { ipcRenderer } = require('electron');
 
+ipcRenderer.on('updateTitle', (_, version) => {
+  const headTitle = document.getElementById('head-title');
+  const title = document.getElementById('title');
+  headTitle.innerHTML = `CS2 MM Server Picker v${version}`;
+  title.innerHTML = `CS2 MM Server Picker v${version}`;
+});
+
+ipcRenderer.on('bindLink', () => {
+  const githubLink = document.getElementById('github');
+  const bahamutLink = document.getElementById('bahamut');
+
+  githubLink.addEventListener('click', () => {
+    ipcRenderer.send('openLink', 'https://github.com/aNyMoRe0505/cs2-mm-server-picker');
+  });
+
+  bahamutLink.addEventListener('click', () => {
+    ipcRenderer.send('openLink', 'https://forum.gamer.com.tw/C.php?bsn=1473&snA=33045');
+  });
+});
+
 ipcRenderer.on('spinner', (_, isLoading) => {
   document.getElementById('loading').style.display = isLoading === true ? 'block' : 'none';
 });
 
 let targetBlockIp = [];
 
-ipcRenderer.on('paintServer', (_, args) => {
+ipcRenderer.on('paintContent', (_, args) => {
   const [displaySvPop, allPopIpv4] = args;
 
   targetBlockIp = [...allPopIpv4];

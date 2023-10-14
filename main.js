@@ -2,18 +2,20 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable global-require */
 const {
-  app, BrowserWindow, ipcMain, dialog,
+  app, BrowserWindow, ipcMain, dialog, shell,
 } = require('electron');
 const path = require('path');
 const ping = require('ping');
 const { updateCS2ServerList, displaySvPop, allPopIpv4 } = require('./src/server');
 const { apply, reset } = require('./src/firewall');
+const pkg = require('./package.json');
+
+const currentVersion = pkg.version;
 
 const createWindow = async () => {
   const win = new BrowserWindow({
-    width:
-     800,
-    height: 600,
+    width: 550,
+    height: 400,
     show: false,
     webPreferences: {
       preload: path.join(__dirname, './src/preload.js'),
@@ -24,11 +26,13 @@ const createWindow = async () => {
   win.setMenuBarVisibility(false);
 
   win.once('ready-to-show', () => {
-    win.show();
+    win.webContents.send('updateTitle', currentVersion);
+    win.webContents.send('bindLink');
     win.webContents.send('spinner', true);
+    win.show();
     updateCS2ServerList().then(() => {
       win.webContents.send('spinner', false);
-      win.webContents.send('paintServer', [displaySvPop, allPopIpv4]);
+      win.webContents.send('paintContent', [displaySvPop, allPopIpv4]);
     });
   });
 };
@@ -65,5 +69,21 @@ app.whenReady().then(() => {
     });
   });
 
+  ipcMain.on('openLink', (_, link) => {
+    shell.openExternal(link);
+  });
+
   createWindow();
+
+  fetch('https://api.github.com/repos/aNyMoRe0505/cs2-mm-server-picker/releases/latest')
+    .then((r) => r.json())
+    .then((result) => {
+      if (result.name !== currentVersion) {
+        dialog.showMessageBoxSync({
+          type: 'info',
+          message: '有最新版本, 請前往下載',
+        });
+        shell.openExternal(result.html_url);
+      }
+    });
 });

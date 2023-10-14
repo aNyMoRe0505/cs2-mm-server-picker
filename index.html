@@ -3,15 +3,20 @@
   <head>
     <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https:">
     <link rel="stylesheet" href="src/main.css">
-    <title>CS2 MM Server Picker v1.0.2</title>
+    <title id="head-title"></title>
   </head>
   <body>
     <div class="container">
-      <h1 class="title">CS2 MM Server Picker v1.0.2</h1>
+      <h1 id="title" class="title"></h1>
       <span id="loading" class="text">讀取中 ...</span>
       <div id="serverContainer">
       </div>
       <div id="actionContainer">
+      </div>
+      <div class="issueWrapper">
+        問題回報:
+        <span id="bahamut" class="issueLink">巴哈姆特</span>
+        <span id="github" class="issueLink">Github</span>
       </div>
     </div>
   </body>
