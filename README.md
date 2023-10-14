@@ -8,7 +8,7 @@
 
 [v1.0.3](https://github.com/aNyMoRe0505/cs2-mm-server-picker/releases/tag/v1.0.3)
 
-點選 cs2-mm-server-picker-1.0.2.Setup.exe
+點選 cs2-mm-server-picker-1.0.3.Setup.exe
 
 ## 必要條件
 
