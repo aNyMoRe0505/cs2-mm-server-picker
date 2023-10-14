@@ -1,6 +1,6 @@
 {
   "name": "cs2-mm-server-picker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "cs2 match-making server picker",
   "main": "main.js",
   "scripts": {
