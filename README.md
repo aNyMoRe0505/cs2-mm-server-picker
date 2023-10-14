@@ -2,11 +2,11 @@
 
 選自己想要玩的伺服器
 
-![385524987_646058704307420_5413434106928422661_n](https://github.com/aNyMoRe0505/cs2-mm-server-picker/assets/9814815/b070c855-2b60-43b2-8644-e9aaa7722085)
+![387530020_284946924406815_7496436808605818704_n](https://github.com/aNyMoRe0505/cs2-mm-server-picker/assets/9814815/2a1ca9fc-9458-4dae-8f8f-39b63934c23e)
 
 ## 下載
 
-[v1.0.2](https://github.com/aNyMoRe0505/cs2-mm-server-picker/releases/tag/v1.0.2)
+[v1.0.3](https://github.com/aNyMoRe0505/cs2-mm-server-picker/releases/tag/v1.0.3)
 
 點選 cs2-mm-server-picker-1.0.2.Setup.exe
 
