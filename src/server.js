@@ -7,10 +7,7 @@ const displaySvPop = {
     name: 'Hong Kong',
   },
   tyo: {
-    name: 'Tokyo North (Japan)',
-  },
-  tyo1: {
-    name: 'Tokyo South (Japan)',
+    name: 'Tokyo Koto City (Japan)',
   },
   sgp: {
     name: 'Singapore',
